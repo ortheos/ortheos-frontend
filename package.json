@@ -15,10 +15,6 @@
     "reactstrap": "^8.7.1",
     "web-vitals": "^0.2.4"
   },
-  
-  "react-dotenv": {
-    "whitelist": ["API_KEY"]
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
