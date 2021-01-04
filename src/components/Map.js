@@ -1,31 +1,65 @@
-import React, { Component } from "react";
-import GoogleMapReact from "google-map-react";
+import React, { Component } from 'react';
+import { Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const mapStyles = {
+  width: '100%',
+  height: '100%'
+};
 
-class SimpleMap extends Component {
-  static defaultProps = {
-    center: {
-      lat: 48.85,
-      lng: 2.34,
-    },
-    zoom: 11,
+export class MapContainer extends Component {
+  state = {
+    showingInfoWindow: false,  // Hides or shows the InfoWindow
+    activeMarker: {},          // Shows the active marker upon click
+    selectedPlace: {}          // Shows the InfoWindow to the selected place upon a marker
+  };
+
+  onMarkerClick = (props, marker, e) =>
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
+
+  onClose = props => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      });
+    }
   };
 
   render() {
     return (
-      // Important! Always set the container height explicitly
-      <div style={{ height: "100vh", width: "100%" }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY }}
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
+      <Map
+        google={this.props.google}
+        zoom={14}
+        style={mapStyles}
+        initialCenter={
+          {
+            lat: -1.2884,
+            lng: 36.8233
+          }
+        }
+      >
+        <Marker
+          onClick={this.onMarkerClick}
+          name={'Kenyatta International Convention Centre'}
+        />
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}
+          onClose={this.onClose}
         >
-          <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
-        </GoogleMapReact>
-      </div>
+          <div>
+            <h4>{this.state.selectedPlace.name}</h4>
+          </div>
+        </InfoWindow>
+      </Map>
     );
   }
 }
 
-export default SimpleMap;
+export default GoogleApiWrapper({
+  apiKey: process.env.REACT_APP_API_KEY
+})(MapContainer);
