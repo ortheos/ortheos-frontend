@@ -1,5 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react';
+
+const axios = require('axios');
+
+// Make a request for a user with a given ID
+axios.get('http://localhost:3000/http://localhost/8000/api/users/1')
+  .then(function (response) {
+    // handle success
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
 
 const mapStyles = {
   width: '100%',
