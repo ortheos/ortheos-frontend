@@ -4,7 +4,7 @@ import axios from "axios";
 
 import Marker from "./Marker";
 
-export class MapContainer extends React.Component {
+export class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +19,7 @@ export class MapContainer extends React.Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:8000/v1/products")
+      .get(process.env.REACT_APP_API_HOST + "/v1/products")
       .then((response) => {
         this.setState({
           products: response.data,
@@ -52,4 +52,4 @@ export class MapContainer extends React.Component {
   }
 }
 
-export default MapContainer;
+export default Map;
