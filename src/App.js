@@ -1,6 +1,4 @@
 import "./App.css";
-import SimpleMap from "./Map.js";
-import Main from "./Main.js";
 import Sells from "./Sell.js"
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
