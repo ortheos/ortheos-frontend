@@ -6,7 +6,7 @@ Geocode.setApiKey(process.env.REACT_APP_API_KEY);
 Geocode.setLanguage("fr");
 Geocode.setRegion("fr");
 
-class Sells extends Component {
+class Sell extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -100,4 +100,4 @@ class Sells extends Component {
 }
 
 
-export default Sells;
+export default Sell;

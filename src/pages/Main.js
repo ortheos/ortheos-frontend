@@ -7,6 +7,7 @@ class Main extends Component {
     return (
       <Button color="warning">
         <Link to="/map">Go to the map</Link>
+        <Link to="/sell">Sell</Link>
       </Button>
     );
   }

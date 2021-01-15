@@ -1,10 +1,10 @@
 import "./App.css";
-import Sells from "./Sell.js"
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Map from "./components/Map.js";
 import Main from "./pages/Main.js";
+import Sell from "./pages/Sell.js";
 
 
 class App extends Component {
@@ -14,7 +14,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Main} />
           <Route exact path="/map" component={Map} />
-          <Route exact path="/sell" components={Sells}/>
+          <Route exact path="/sell" component={Sell}/>
         </Switch>
       </BrowserRouter>
     );
