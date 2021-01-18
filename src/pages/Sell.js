@@ -1,60 +1,65 @@
 import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input, Col, Row } from "reactstrap";
 import Geocode from "react-geocode";
+import axios from 'axios'
 
 Geocode.setApiKey(process.env.REACT_APP_API_KEY);
 Geocode.setLanguage("fr");
 Geocode.setRegion("fr");
 
-class Sell extends Component {
+class Sells extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  getCoordinates(address) {
-    Geocode.fromAddress(address).then(
-     response => {
-      const {lat, lng} = response.results[0].geometry.location;
-      console.log(lat, lng);
-      return {
-        lat, 
-        lng
-      }
-
-    },
-    error => {
-      console.error(error);
-    }  
-    );
-  }
+  getCoordinates(address) {}
 
   handleSubmit(event) {
-    var vente = JSON.stringify({
-      name: document.getElementById("brand").value,
-      description: document.getElementById("desc").value,
-      price: document.getElementById("price").value,
-      city: document.getElementById("city").value,
-    });
-    var coord = this.getCoordinates(document.getElementById("city").value)
-    console.log(coord)
-    localStorage.setItem("newItem", vente); //stockage mémoire des comptes non connectés
-    event.preventDefault();
+    Geocode.fromAddress(document.getElementById("address").value).then(
+      (response) => {
+        const { lat, lng } = response.results[0].geometry.location;
+
+        var vente = JSON.stringify({
+          email: document.getElementById("email").value,
+          name: document.getElementById("brand").value,
+          description: document.getElementById("desc").value,
+          price: document.getElementById("price").value,
+          address: document.getElementById("address").value,
+          lat: lat,
+          lng: lng,
+        });
+        console.log(vente)
+        axios.post('https://localhost:8000/v1/products', vente)
+      }
+
+    );
   }
 
   render() {
     return (
       <>
         <Form>
-          <Row form>
+        <Row form>
             <Col md={6}>
               <FormGroup>
-                <Label for="exampleName">Mettre en ligne une orthèse</Label>
+                <Label for="exampleDesc">Votre email</Label>
                 <Input
-                  type="brand"
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="votreMail@youpi.com"
+                />
+              </FormGroup>
+            </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Label for="exampleLastName">Votre produit</Label>
+                <Input
+                  type="text"
                   name="brand"
                   id="brand"
-                  placeholder="Nom du produit"
+                  placeholder="Nom de votre produit"
                 />
               </FormGroup>
             </Col>
@@ -64,7 +69,7 @@ class Sell extends Component {
               <FormGroup>
                 <Label for="exampleDesc">Description</Label>
                 <Input
-                  type="desc"
+                  type="text"
                   name="desc"
                   id="desc"
                   placeholder="Description du produit"
@@ -75,7 +80,7 @@ class Sell extends Component {
               <FormGroup>
                 <Label for="exampleLastName">Prix</Label>
                 <Input
-                  type="price"
+                  type="number"
                   name="price"
                   id="price"
                   placeholder="Prix"
@@ -86,18 +91,27 @@ class Sell extends Component {
           <Row form>
             <Col md={6}>
               <FormGroup>
+                <Label for="exampleDesc">Taille</Label>
+                <Input
+                  type="text"
+                  name="size"
+                  id="size"
+                  placeholder="Taille de votre materiel"
+                />
+              </FormGroup>
+            </Col>
+            <Col md={6}>
+              <FormGroup>
                 <Label for="exampleVille">Ville</Label>
-                <Input type="city" name="city" id="city" placeholder="Ville" />
+                <Input type="text" name="address" id="address" placeholder="Ville" />
               </FormGroup>
             </Col>
           </Row>
-          <Button onClick={this.handleSubmit}>Mettre en vente</Button>
+          <Button onClick={this.handleSubmit} >Mettre en vente</Button>
         </Form>
       </>
     );
   }
-  
 }
 
-
-export default Sell;
+export default Sells;
