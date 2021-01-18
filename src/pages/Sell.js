@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input, Col, Row } from "reactstrap";
 import Geocode from "react-geocode";
-import axios from 'axios'
 
 Geocode.setApiKey(process.env.REACT_APP_API_KEY);
 Geocode.setLanguage("fr");
@@ -19,8 +18,7 @@ class Sells extends Component {
     Geocode.fromAddress(document.getElementById("address").value).then(
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
-
-        var vente = JSON.stringify({
+        const body = JSON.stringify({
           email: document.getElementById("email").value,
           name: document.getElementById("brand").value,
           description: document.getElementById("desc").value,
@@ -29,10 +27,18 @@ class Sells extends Component {
           lat: lat,
           lng: lng,
         });
-        console.log(vente)
-        axios.post('https://localhost:8000/v1/products', vente)
+        fetch("http://localhost:8080/v1/products", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: body,
+        });
+      },
+      (error) => {
+        console.log(error);
       }
-
     );
   }
 
@@ -40,7 +46,7 @@ class Sells extends Component {
     return (
       <>
         <Form>
-        <Row form>
+          <Row form>
             <Col md={6}>
               <FormGroup>
                 <Label for="exampleDesc">Votre email</Label>
@@ -103,11 +109,16 @@ class Sells extends Component {
             <Col md={6}>
               <FormGroup>
                 <Label for="exampleVille">Ville</Label>
-                <Input type="text" name="address" id="address" placeholder="Ville" />
+                <Input
+                  type="text"
+                  name="address"
+                  id="address"
+                  placeholder="Ville"
+                />
               </FormGroup>
             </Col>
           </Row>
-          <Button onClick={this.handleSubmit} >Mettre en vente</Button>
+          <Button onClick={this.handleSubmit}>Mettre en vente</Button>
         </Form>
       </>
     );
