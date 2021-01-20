@@ -2,6 +2,11 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid, Button, TextField } from '@material-ui/core';
 import validate from 'validate.js';
+import Geocode from 'react-geocode'
+
+Geocode.setApiKey(process.env.REACT_APP_API_KEY);
+Geocode.setLanguage("fr");
+Geocode.setRegion("fr");
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,7 +34,31 @@ const schema = {
       maximum: 120,
     },
   },
-  password: {
+  productName: {
+    presence: { allowEmpty: false, message: 'is required' },
+    length: {
+      minimum: 8,
+    },
+  },
+  productDescription: {
+    presence: { allowEmpty: false, message: 'is required' },
+    length: {
+      minimum: 8,
+    },
+  },
+  price: {
+    presence: { allowEmpty: false, message: 'is required' },
+    length: {
+      minimum: 1,
+    },
+  },
+  size: {
+    presence: { allowEmpty: false, message: 'is required' },
+    length: {
+      minimum: 1,
+    },
+  },
+  localisation: {
     presence: { allowEmpty: false, message: 'is required' },
     length: {
       minimum: 8,
@@ -79,10 +108,32 @@ const Form = () => {
   const handleSubmit = event => {
     event.preventDefault();
 
+    Geocode.fromAddress(formState.value.localisation).then(
+      (response) => {
+        const { lat, lng } = response.results[0].geometry.location;
+        const body = JSON.stringify({
+          ...formState.values,
+          lat: lat,
+          lng: lng,
+        });
+        fetch(process.env.REACT_APP_API_HOST + "/v1/products", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: body,
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    
     if (formState.isValid) {
       window.location.replace('/');
     }
-
+    
     setFormState(formState => ({
       ...formState,
       touched: {
@@ -90,7 +141,9 @@ const Form = () => {
         ...formState.errors,
       },
     }));
-  };
+  };  
+
+  console.log(formState)
 
   const hasError = field =>
     formState.touched[field] && formState.errors[field] ? true : false;
@@ -101,8 +154,8 @@ const Form = () => {
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <TextField
-              placeholder="First name"
-              label="First name *"
+              placeholder="Prénom"
+              label="Prénom *"
               variant="outlined"
               size="medium"
               name="firstName"
@@ -118,8 +171,8 @@ const Form = () => {
           </Grid>
           <Grid item xs={6}>
             <TextField
-              placeholder="Last name"
-              label="Last name *"
+              placeholder="Nom de famille"
+              label="Nom de famille *"
               variant="outlined"
               size="medium"
               name="lastName"
@@ -150,19 +203,87 @@ const Form = () => {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              placeholder="Password"
-              label="Password *"
+              placeholder="Nom du produit"
+              label="Nom du produit *"
               variant="outlined"
               size="medium"
-              name="password"
+              name="productName"
               fullWidth
               helperText={
-                hasError('password') ? formState.errors.password[0] : null
+                hasError('productName') ? formState.errors.productName[0] : null
               }
-              error={hasError('password')}
+              error={hasError('productName')}
               onChange={handleChange}
-              type="password"
-              value={formState.values.password || ''}
+              type="text"
+              value={formState.values.productName || ''}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              placeholder="Description du produit"
+              label="Description du produit *"
+              variant="outlined"
+              size="medium"
+              name="productDescription"
+              fullWidth
+              helperText={
+                hasError('productDescription') ? formState.errors.productDescription[0] : null
+              }
+              error={hasError('productDescription')}
+              onChange={handleChange}
+              type="text"
+              value={formState.values.productDescription || ''}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              placeholder="Taille"
+              label="Taille *"
+              variant="outlined"
+              size="medium"
+              name="size"
+              fullWidth
+              helperText={
+                hasError('size') ? formState.errors.size[0] : null
+              }
+              error={hasError('size')}
+              onChange={handleChange}
+              type="text"
+              value={formState.values.size|| ''}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              placeholder="Prix"
+              label="Prix *"
+              variant="outlined"
+              size="medium"
+              name="price"
+              fullWidth
+              helperText={
+                hasError('price') ? formState.errors.price[0] : null
+              }
+              error={hasError('price')}
+              onChange={handleChange}
+              type="double"
+              value={formState.values.price || ''}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              placeholder="Localisation (Ville, Quartier, ...)"
+              label="Localisation *"
+              variant="outlined"
+              size="medium"
+              name="localisation"
+              fullWidth
+              helperText={
+                hasError('localisation') ? formState.errors.localisation[0] : null
+              }
+              error={hasError('plocalisation')}
+              onChange={handleChange}
+              type="text"
+              value={formState.values.localisation || ''}
             />
           </Grid>
           <Grid item xs={12}>

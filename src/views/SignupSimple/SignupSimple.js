@@ -30,8 +30,8 @@ const SignupSimple = () => {
       <Section className={classes.section}>
         <div className={classes.formContainer}>
           <SectionHeader
-            title="Sign up"
-            subtitle="Create beautiful marketing websites in hours instead of weeks."
+            title="Mettre en ligne une orthèse"
+            subtitle="Veuillez compléter le formulaire ci-joint afin de mettre en ligne votre orthèse"
             titleProps={{
               variant: 'h3',
             }}
