@@ -22,7 +22,7 @@ export class Map extends React.Component {
       .get(process.env.REACT_APP_API_HOST + "/v1/products")
       .then((response) => {
         this.setState({
-          products: response.data,
+          products: response.data.result,
         });
       })
       .catch((error) => {
