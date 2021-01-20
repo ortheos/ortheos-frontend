@@ -66,6 +66,8 @@ const Map = () => {
     setLng(position.coords.longitude);
   });
 
+  console.log(products)
+
   return (
     <div style={{ height: "100vh", width: "100%" }}>
       <GoogleMapReact

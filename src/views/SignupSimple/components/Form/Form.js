@@ -108,29 +108,28 @@ const Form = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    Geocode.fromAddress(formState.values.address).then(
-      (response) => {
-        const { lat, lng } = response.results[0].geometry.location;
-        const body = JSON.stringify({
-          ...formState.values,
-          lat: lat,
-          lng: lng,
-        });
-        fetch(process.env.REACT_APP_API_HOST + "v1/products", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: body,
-        });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-
     if (formState.isValid) {
+      Geocode.fromAddress(formState.values.address).then(
+        (response) => {
+          const { lat, lng } = response.results[0].geometry.location;
+          const body = JSON.stringify({
+            ...formState.values,
+            lat: lat,
+            lng: lng,
+          });
+          fetch(process.env.REACT_APP_API_HOST + "v1/products", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: body,
+          });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
       window.location.replace("/");
     }
 
@@ -274,9 +273,7 @@ const Form = () => {
               name="address"
               fullWidth
               helperText={
-                hasError("address")
-                  ? formState.errors.address[0]
-                  : null
+                hasError("address") ? formState.errors.address[0] : null
               }
               error={hasError("address")}
               onChange={handleChange}
