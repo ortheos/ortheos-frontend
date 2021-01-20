@@ -1,39 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Section } from "components/organisms";
+import React, { useState, useEffect, useRef } from "react";
+import GoogleMapReact from "google-map-react";
+import useSupercluster from "use-supercluster";
+import "./map.css";
 
-const useStyles = makeStyles((theme) => ({
-  root: {},
-  formContainer: {
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    minHeight: `calc(100vh - ${theme.mixins.toolbar["@media (min-width:600px)"].minHeight}px)`,
-    maxWidth: 500,
-    margin: `0 auto`,
-  },
-  section: {
-    paddingTop: 0,
-    paddingBottom: 0,
-  },
-  label: {
-    fontWeight: "bold",
-    textTransform: "uppercase",
-  },
-}));
+const Marker = ({ children }) => children;
 
 const Map = () => {
-  const classes = useStyles();
-  const [items, setItems] = useState([]);
+  const mapRef = useRef();
+  const [products, setProducts] = useState([]);
+  const [bounds, setBounds] = useState(null);
+  const [zoom, setZoom] = useState(10);
 
   useEffect(() => {
     fetch(process.env.REACT_APP_API_HOST + "v1/products")
       .then((res) => res.json())
       .then(
         (result) => {
-          setItems(result);
+          setProducts(result);
         },
         (error) => {
           console.log(error);
@@ -41,11 +24,93 @@ const Map = () => {
       );
   }, []);
 
+  const points = products.map((product) => ({
+    type: "Feature",
+    properties: {
+      cluster: false,
+      productId: product.id,
+    },
+    geometry: {
+      type: "Point",
+      coordinates: [product.user.lng, product.user.lat],
+    },
+  }));
+
+  const { clusters, supercluster } = useSupercluster({
+    points,
+    bounds,
+    zoom,
+    options: { radius: 75, maxZoom: 20 },
+  });
+
   return (
-    <div className={classes.root}>
-      <Section className={classes.section}>
-        <div className={classes.formContainer}># of products: {items.length}</div>
-      </Section>
+    <div style={{ height: "100vh", width: "100%" }}>
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
+        defaultCenter={{ lat: 52.6376, lng: -1.135171 }}
+        defaultZoom={1}
+        yesIWantToUseGoogleMapApiInternals
+        onGoogleApiLoaded={({ map }) => {
+          mapRef.current = map;
+        }}
+        onChange={({ zoom, bounds }) => {
+          setZoom(zoom);
+          setBounds([
+            bounds.nw.lng,
+            bounds.se.lat,
+            bounds.se.lng,
+            bounds.nw.lat,
+          ]);
+        }}
+      >
+        {clusters.map((cluster) => {
+          const [longitude, latitude] = cluster.geometry.coordinates;
+          const {
+            cluster: isCluster,
+            point_count: pointCount,
+          } = cluster.properties;
+
+          if (isCluster) {
+            return (
+              <Marker
+                key={`cluster-${cluster.id}`}
+                lat={latitude}
+                lng={longitude}
+              >
+                <div
+                  className="cluster-marker"
+                  style={{
+                    width: `${10 + (pointCount / points.length) * 20}px`,
+                    height: `${10 + (pointCount / points.length) * 20}px`,
+                  }}
+                  onClick={() => {
+                    const expansionZoom = Math.min(
+                      supercluster.getClusterExpansionZoom(cluster.id),
+                      20
+                    );
+                    mapRef.current.setZoom(expansionZoom);
+                    mapRef.current.panTo({ lat: latitude, lng: longitude });
+                  }}
+                >
+                  {pointCount}
+                </div>
+              </Marker>
+            );
+          }
+
+          return (
+            <Marker
+              key={`product-${cluster.properties.productId}`}
+              lat={latitude}
+              lng={longitude}
+            >
+              <button className="product-marker">
+                <img src="marker.svg" alt="product" />
+              </button>
+            </Marker>
+          );
+        })}
+      </GoogleMapReact>
     </div>
   );
 };
