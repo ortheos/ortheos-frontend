@@ -1,24 +1,53 @@
-import "./App.css";
-import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import React from "react";
+import { Router } from "react-router-dom";
+import { createBrowserHistory } from "history";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { Paper, CssBaseline } from "@material-ui/core";
+import AOS from "aos";
 
-import Map from "./components/Map.js";
-import Main from "./pages/Main.js";
-import Sell from "./pages/Sell.js";
+import theme from "./theme";
+import Routes from "./Routes";
 
+import "react-lazy-load-image-component/src/effects/opacity.css";
+import "aos/dist/aos.css";
 
-class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={Main} />
-          <Route exact path="/map" component={Map} />
-          <Route exact path="/sell" component={Sell}/>
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-}
+const browserHistory = createBrowserHistory();
+
+browserHistory.listen((location) => {
+  // Use setTimeout to make sure this runs after React Router's own listener
+  setTimeout(() => {
+    // Keep default behavior of restoring scroll position when user:
+    // - clicked back button
+    // - clicked on a link that programmatically calls `history.goBack()`
+    // - manually changed the URL in the address bar (here we might want
+    // to scroll to top, but we can't differentiate it from the others)
+    if (location.action === "POP") {
+      return;
+    }
+    // In all other cases, scroll to top
+    window.scrollTo(0, 0);
+  });
+});
+
+const App = () => {
+  AOS.init({
+    once: true,
+    delay: 50,
+    duration: 500,
+    easing: "ease-in-out",
+  });
+
+  return (
+    <ThemeProvider theme={theme}>
+      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+      <CssBaseline />
+      <Paper>
+        <Router history={browserHistory}>
+          <Routes />
+        </Router>
+      </Paper>
+    </ThemeProvider>
+  );
+};
 
 export default App;

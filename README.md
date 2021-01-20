@@ -1,70 +1,85 @@
-# ortheos frontend
+# [UI Kit - The Front](https://thefront-preview.maccarianagency.com/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Material React Landing Pages Kit made with [Material-UI's](https://material-ui.com/?ref=maccarian-agency) components, [React](https://reactjs.org/?ref=maccarian-agency) and of course [create-react-app](https://facebook.github.io/create-react-app/?ref=maccarian-agency) to boost your app development process!
+A professional React Kit that comes with plenty of ready-to-use Material-UI components that will help you to build faster & beautiful Fontend pages. Each component is fully customizable, responsive and easy to integrate.
 
-## Available Scripts
+## Built with
 
-In the project directory, you can run:
+- React
+- Material-UI v4
 
-### `yarn start`
+## Quick start with React Scripts
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Download the theme
+- Make sure your NodeJS and npm versions are up to date for `React 16.8.6`
+- Install dependencies: `npm install`
+- Start the server: `npm run start`
+- Views are on: `localhost:3000`
+- Build on production: `npm run build`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Folder structure
 
-### `yarn test`
+In the root folder there are 2 folders:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **public** *Here are the public assets, images and `index.html` file.*
+- **src** *Here is the main business logic of the theme.*
+- **|----components** *The reusable and stand-alone components are stored here, by following [Atomic Design Methodology](https://bradfrost.com/blog/post/atomic-web-design/)*
+- **|----|----atoms** *These are small functional components that are not using any other atomic components*
+- **|----|----molecules** *Tese are those functional components which have dependencies from other atoms*
+- **|----|----organisms** *These are the functional components that are using other molecules and atoms*
+- **|----layouts**
+- **|----|----Main** *The main layout: header navigation, the main container and footer part*
+- **|----|----Minimal** *The minimal layout*
+- **|----theme** *In this folder there are overrides of the default color palette and typography coming from MUI*
+- **|----views** *All the views/pages that are available. Here are the combination and composition of re-usable components and pages representations.*
 
-### `yarn build`
+## Landing Pages Built For Customization
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+theFront landing page examples can be used out of the box, but since they’re built on flexible components, you can also create new pages all your own with ease. Copy-paste a section here, a component there, switch up a few variables, and you have an entirely new landing!
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## [In the extended version](https://material-ui.com/store/items/the-front-landing-page/) of the kit you will get:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### The full list of pages
 
-### `yarn eject`
+- More than 45 pages
+- 300+ component compositions
+- 30+ stand-alone components
+- create-react-app scripts support
+- NextJS and server side rendering support
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### [Overview Of All Pages](https://thefront.maccarianagency.com)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Development Highlights
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+We built Thefront to make you be able to customize and extend our components as simple as the Material UI core itself.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Component-centric atomic design architechture
+- Customization made easy with stand alone components
+- Browsersync live reload
+- Fully responsive on all modern browsers
+- Rich documentation with code samples and parameters/options
 
-## Learn More
+## Design Highlights
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+theFront was designed as a rich system from the start, which is reflected in both the end result and the original design.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Beautiful, modern style flexible enough to suit most brands
+- Included Sketch design file
+- Type styles, color styles, and components for easy file-wide changes
+- All images are included with a free-to-use license
+- Icon set provided by Font Awesome Kit
 
-### Code Splitting
+## MUI Documentation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The full documentation for the React Material Kit can be found [here](https://material-ui.com?ref=maccarian-agency).
 
-### Analyzing the Bundle Size
+## Upgrade to PRO
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+You can updrade to use the PRO version and access to all the pages & components [here](https://material-ui.com/store/items/the-front-landing-page/).
 
-### Making a Progressive Web App
+## Contact Us
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Email Us: hi@maccarianagency.com
+- [Follow us on Linkedin](https://www.linkedin.com/company/maccarian)
+- [Follow us on Instagram](https://www.instagram.com/maccarian/)
+- [Follow us on Facebook](https://facebook.com/maccarian.agency/)
