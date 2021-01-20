@@ -134,22 +134,13 @@ const Form = () => {
               "Content-Type": "application/json",
             },
             body: body,
-          })
-            .then((res) => res.json())
-            .then(
-              (result) => {
-                console.log(result);
-              },
-              (err) => {
-                console.log(err);
-              }
-            );
+          });
         },
         (error) => {
           console.log(error);
         }
       );
-      //window.location.replace("/");
+      window.location.replace("/");
     }
 
     setFormState((formState) => ({
