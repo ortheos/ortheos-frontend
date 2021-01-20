@@ -27,7 +27,7 @@ class Sells extends Component {
           lat: lat,
           lng: lng,
         });
-        fetch("http://localhost:8080/v1/products", {
+        fetch(process.env.REACT_APP_API_HOST + "/v1/products", {
           method: "POST",
           headers: {
             Accept: "application/json",
