@@ -1,65 +1,65 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Grid, Button, TextField } from '@material-ui/core';
-import validate from 'validate.js';
-import Geocode from 'react-geocode'
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Typography, Grid, Button, TextField } from "@material-ui/core";
+import validate from "validate.js";
+import Geocode from "react-geocode";
 
-Geocode.setApiKey(process.env.REACT_APP_API_KEY);
+Geocode.setApiKey(process.env.REACT_APP_GOOGLE_KEY);
 Geocode.setLanguage("fr");
 Geocode.setRegion("fr");
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
   },
 }));
 
 const schema = {
   email: {
-    presence: { allowEmpty: false, message: 'is required' },
+    presence: { allowEmpty: false, message: "is required" },
     email: true,
     length: {
       maximum: 300,
     },
   },
   firstName: {
-    presence: { allowEmpty: false, message: 'is required' },
+    presence: { allowEmpty: false, message: "is required" },
     length: {
       maximum: 120,
     },
   },
   lastName: {
-    presence: { allowEmpty: false, message: 'is required' },
+    presence: { allowEmpty: false, message: "is required" },
     length: {
       maximum: 120,
     },
   },
   productName: {
-    presence: { allowEmpty: false, message: 'is required' },
+    presence: { allowEmpty: false, message: "is required" },
     length: {
       minimum: 8,
     },
   },
   productDescription: {
-    presence: { allowEmpty: false, message: 'is required' },
+    presence: { allowEmpty: false, message: "is required" },
     length: {
       minimum: 8,
     },
   },
   price: {
-    presence: { allowEmpty: false, message: 'is required' },
+    presence: { allowEmpty: false, message: "is required" },
     length: {
       minimum: 1,
     },
   },
   size: {
-    presence: { allowEmpty: false, message: 'is required' },
+    presence: { allowEmpty: false, message: "is required" },
     length: {
       minimum: 1,
     },
   },
-  localisation: {
-    presence: { allowEmpty: false, message: 'is required' },
+  address: {
+    presence: { allowEmpty: false, message: "is required" },
     length: {
       minimum: 8,
     },
@@ -79,22 +79,22 @@ const Form = () => {
   React.useEffect(() => {
     const errors = validate(formState.values, schema);
 
-    setFormState(formState => ({
+    setFormState((formState) => ({
       ...formState,
       isValid: errors ? false : true,
       errors: errors || {},
     }));
   }, [formState.values]);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     event.persist();
 
-    setFormState(formState => ({
+    setFormState((formState) => ({
       ...formState,
       values: {
         ...formState.values,
         [event.target.name]:
-          event.target.type === 'checkbox'
+          event.target.type === "checkbox"
             ? event.target.checked
             : event.target.value,
       },
@@ -105,10 +105,10 @@ const Form = () => {
     }));
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    Geocode.fromAddress(formState.value.localisation).then(
+    Geocode.fromAddress(formState.values.address).then(
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
         const body = JSON.stringify({
@@ -116,7 +116,7 @@ const Form = () => {
           lat: lat,
           lng: lng,
         });
-        fetch(process.env.REACT_APP_API_HOST + "/v1/products", {
+        fetch(process.env.REACT_APP_API_HOST + "v1/products", {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -129,23 +129,21 @@ const Form = () => {
         console.log(error);
       }
     );
-    
+
     if (formState.isValid) {
-      window.location.replace('/');
+      window.location.replace("/");
     }
-    
-    setFormState(formState => ({
+
+    setFormState((formState) => ({
       ...formState,
       touched: {
         ...formState.touched,
         ...formState.errors,
       },
     }));
-  };  
+  };
 
-  console.log(formState)
-
-  const hasError = field =>
+  const hasError = (field) =>
     formState.touched[field] && formState.errors[field] ? true : false;
 
   return (
@@ -161,12 +159,12 @@ const Form = () => {
               name="firstName"
               fullWidth
               helperText={
-                hasError('firstName') ? formState.errors.firstName[0] : null
+                hasError("firstName") ? formState.errors.firstName[0] : null
               }
-              error={hasError('firstName')}
+              error={hasError("firstName")}
               onChange={handleChange}
               type="firstName"
-              value={formState.values.firstName || ''}
+              value={formState.values.firstName || ""}
             />
           </Grid>
           <Grid item xs={6}>
@@ -178,12 +176,12 @@ const Form = () => {
               name="lastName"
               fullWidth
               helperText={
-                hasError('lastName') ? formState.errors.lastName[0] : null
+                hasError("lastName") ? formState.errors.lastName[0] : null
               }
-              error={hasError('lastName')}
+              error={hasError("lastName")}
               onChange={handleChange}
               type="lastName"
-              value={formState.values.lastName || ''}
+              value={formState.values.lastName || ""}
             />
           </Grid>
           <Grid item xs={12}>
@@ -194,11 +192,11 @@ const Form = () => {
               size="medium"
               name="email"
               fullWidth
-              helperText={hasError('email') ? formState.errors.email[0] : null}
-              error={hasError('email')}
+              helperText={hasError("email") ? formState.errors.email[0] : null}
+              error={hasError("email")}
               onChange={handleChange}
               type="email"
-              value={formState.values.email || ''}
+              value={formState.values.email || ""}
             />
           </Grid>
           <Grid item xs={12}>
@@ -210,12 +208,12 @@ const Form = () => {
               name="productName"
               fullWidth
               helperText={
-                hasError('productName') ? formState.errors.productName[0] : null
+                hasError("productName") ? formState.errors.productName[0] : null
               }
-              error={hasError('productName')}
+              error={hasError("productName")}
               onChange={handleChange}
               type="text"
-              value={formState.values.productName || ''}
+              value={formState.values.productName || ""}
             />
           </Grid>
           <Grid item xs={12}>
@@ -227,12 +225,14 @@ const Form = () => {
               name="productDescription"
               fullWidth
               helperText={
-                hasError('productDescription') ? formState.errors.productDescription[0] : null
+                hasError("productDescription")
+                  ? formState.errors.productDescription[0]
+                  : null
               }
-              error={hasError('productDescription')}
+              error={hasError("productDescription")}
               onChange={handleChange}
               type="text"
-              value={formState.values.productDescription || ''}
+              value={formState.values.productDescription || ""}
             />
           </Grid>
           <Grid item xs={6}>
@@ -243,13 +243,11 @@ const Form = () => {
               size="medium"
               name="size"
               fullWidth
-              helperText={
-                hasError('size') ? formState.errors.size[0] : null
-              }
-              error={hasError('size')}
+              helperText={hasError("size") ? formState.errors.size[0] : null}
+              error={hasError("size")}
               onChange={handleChange}
               type="text"
-              value={formState.values.size|| ''}
+              value={formState.values.size || ""}
             />
           </Grid>
           <Grid item xs={6}>
@@ -260,30 +258,30 @@ const Form = () => {
               size="medium"
               name="price"
               fullWidth
-              helperText={
-                hasError('price') ? formState.errors.price[0] : null
-              }
-              error={hasError('price')}
+              helperText={hasError("price") ? formState.errors.price[0] : null}
+              error={hasError("price")}
               onChange={handleChange}
               type="double"
-              value={formState.values.price || ''}
+              value={formState.values.price || ""}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
-              placeholder="Localisation (Ville, Quartier, ...)"
-              label="Localisation *"
+              placeholder="Adresse"
+              label="Adresse *"
               variant="outlined"
               size="medium"
-              name="localisation"
+              name="address"
               fullWidth
               helperText={
-                hasError('localisation') ? formState.errors.localisation[0] : null
+                hasError("address")
+                  ? formState.errors.address[0]
+                  : null
               }
-              error={hasError('plocalisation')}
+              error={hasError("address")}
               onChange={handleChange}
               type="text"
-              value={formState.values.localisation || ''}
+              value={formState.values.address || ""}
             />
           </Grid>
           <Grid item xs={12}>
