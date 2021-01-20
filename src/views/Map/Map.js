@@ -53,7 +53,7 @@ const Map = () => {
       .then((res) => res.json())
       .then(
         (result) => {
-          setProducts(result);
+          setProducts(result.result);
         },
         (error) => {
           console.log(error);
@@ -65,8 +65,6 @@ const Map = () => {
     setLat(position.coords.latitude);
     setLng(position.coords.longitude);
   });
-
-  console.log(products)
 
   return (
     <div style={{ height: "100vh", width: "100%" }}>

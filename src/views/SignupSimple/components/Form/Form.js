@@ -113,9 +113,18 @@ const Form = () => {
         (response) => {
           const { lat, lng } = response.results[0].geometry.location;
           const body = JSON.stringify({
-            ...formState.values,
-            lat: lat,
-            lng: lng,
+            name: formState.values.productName,
+            description: formState.values.productDescription,
+            size: formState.values.size,
+            price: formState.values.price,
+            user: {
+              email: formState.values.email,
+              firstName: formState.values.firstName,
+              lastName: formState.values.lastName,
+              address: formState.values.address,
+              lat: lat,
+              lng: lng,
+            },
           });
           fetch(process.env.REACT_APP_API_HOST + "v1/products", {
             method: "POST",
