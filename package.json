@@ -49,8 +49,6 @@
     "react-scripts": "^4.0.0",
     "react-visibility-sensor": "^5.1.1",
     "start": "^5.1.0",
-    "supercluster": "^7.1.2",
-    "use-supercluster": "^0.2.9",
     "validate.js": "^0.13.1"
   },
   "devDependencies": {

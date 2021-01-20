@@ -1,15 +1,52 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
-import useSupercluster from "use-supercluster";
-import "./map.css";
 
-const Marker = ({ children }) => children;
+const getInfoWindowString = (product) => `
+    <div>
+      <div style="font-size: 16px;">
+        ${product.name}
+      </div>
+      <div style="font-size: 14px; color: grey;">
+        ${product.description}
+      </div>
+      <div style="font-size: 14px; color: grey;">
+        ${product.price} €
+      </div>
+    </div>`;
+
+const handleApiLoaded = (map, maps, products) => {
+  const markers = [];
+  const infowindows = [];
+
+  products.forEach((product) => {
+    markers.push(
+      new maps.Marker({
+        position: {
+          lat: product.user.lat,
+          lng: product.user.lng,
+        },
+        map,
+      })
+    );
+
+    infowindows.push(
+      new maps.InfoWindow({
+        content: getInfoWindowString(product),
+      })
+    );
+  });
+
+  markers.forEach((marker, i) => {
+    marker.addListener("click", () => {
+      infowindows[i].open(map, marker);
+    });
+  });
+};
 
 const Map = () => {
-  const mapRef = useRef();
   const [products, setProducts] = useState([]);
-  const [bounds, setBounds] = useState(null);
-  const [zoom, setZoom] = useState(10);
+  const [lat, setLat] = useState(48.8566);
+  const [lng, setLng] = useState(2.3522);
 
   useEffect(() => {
     fetch(process.env.REACT_APP_API_HOST + "v1/products")
@@ -24,93 +61,22 @@ const Map = () => {
       );
   }, []);
 
-  const points = products.map((product) => ({
-    type: "Feature",
-    properties: {
-      cluster: false,
-      productId: product.id,
-    },
-    geometry: {
-      type: "Point",
-      coordinates: [product.user.lng, product.user.lat],
-    },
-  }));
-
-  const { clusters, supercluster } = useSupercluster({
-    points,
-    bounds,
-    zoom,
-    options: { radius: 75, maxZoom: 20 },
+  navigator.geolocation.getCurrentPosition((position) => {
+    setLat(position.coords.latitude);
+    setLng(position.coords.longitude);
   });
 
   return (
     <div style={{ height: "100vh", width: "100%" }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
-        defaultCenter={{ lat: 52.6376, lng: -1.135171 }}
-        defaultZoom={1}
+        center={{ lat: lat, lng: lng }}
+        defaultZoom={10}
         yesIWantToUseGoogleMapApiInternals
-        onGoogleApiLoaded={({ map }) => {
-          mapRef.current = map;
-        }}
-        onChange={({ zoom, bounds }) => {
-          setZoom(zoom);
-          setBounds([
-            bounds.nw.lng,
-            bounds.se.lat,
-            bounds.se.lng,
-            bounds.nw.lat,
-          ]);
-        }}
-      >
-        {clusters.map((cluster) => {
-          const [longitude, latitude] = cluster.geometry.coordinates;
-          const {
-            cluster: isCluster,
-            point_count: pointCount,
-          } = cluster.properties;
-
-          if (isCluster) {
-            return (
-              <Marker
-                key={`cluster-${cluster.id}`}
-                lat={latitude}
-                lng={longitude}
-              >
-                <div
-                  className="cluster-marker"
-                  style={{
-                    width: `${10 + (pointCount / points.length) * 20}px`,
-                    height: `${10 + (pointCount / points.length) * 20}px`,
-                  }}
-                  onClick={() => {
-                    const expansionZoom = Math.min(
-                      supercluster.getClusterExpansionZoom(cluster.id),
-                      20
-                    );
-                    mapRef.current.setZoom(expansionZoom);
-                    mapRef.current.panTo({ lat: latitude, lng: longitude });
-                  }}
-                >
-                  {pointCount}
-                </div>
-              </Marker>
-            );
-          }
-
-          return (
-            <Marker
-              key={`product-${cluster.properties.productId}`}
-              lat={latitude}
-              lng={longitude}
-            >
-              <button className="product-marker">
-                <img src="marker.svg" alt="product" />
-              </button>
-            </Marker>
-          );
-        })}
-      </GoogleMapReact>
+        onGoogleApiLoaded={({ map, maps }) =>
+          handleApiLoaded(map, maps, products)
+        }
+      />
     </div>
   );
 };
