@@ -35,9 +35,8 @@ const Customization = props => {
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <SectionHeader
-        label="Customization"
-        title="Customize your product"
-        subtitle="We aim to take care of you. Need help with installation, find a bug, or just need a clarifiction about our documentation? We'll be there to lend a helping hand."
+        title="Rejoins-nous"
+        subtitle="Renseignez vos coordonnées pour restez informé des nouvelles annonces."
         align="center"
         ctaGroup={[
           <Button variant="contained" color="primary" size="large">
@@ -52,7 +51,7 @@ const Customization = props => {
         <Grid item xs={12} sm={6}>
           <Grid container justif="center" alignItems="center">
             <Image
-              src="/images/illustrations/dashboard-screenshot.jpg"
+              src="/images/illustrations/medical-home.png"
               alt="TheFront Company"
               className={classes.image}
               data-aos="fade-up"
@@ -67,7 +66,7 @@ const Customization = props => {
             className={classes.lastGrid}
           >
             <Image
-              src="/images/illustrations/dashboard-screenshot1.jpg"
+              src="/images/illustrations/medical-home1.png"
               alt="TheFront Company"
               className={classes.image}
               data-aos="fade-up"

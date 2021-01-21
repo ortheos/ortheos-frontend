@@ -43,7 +43,7 @@ const Features = props => {
           data-aos="fade-up"
         >
           <Image
-            src="/images/illustrations/dashboard-screenshot1.jpg"
+            src="/images/illustrations/livraison-home.svg"
             alt="..."
             className={classes.coverImage}
             data-aos="flip-left"
@@ -65,14 +65,14 @@ const Features = props => {
               <SectionHeader
                 title={
                   <span>
-                    Use flexible components.
+                    Livraison à domicile rapide en un clic.
                     <br />
                     <Typography component="span" variant="inherit" color="primary">
-                      to build an app quickly.
+                      Des bonnes affaires à des prix avantageux.
                     </Typography>
                   </span>
                 }
-                subtitle="theFront styles and extends Material-UI components, but also included brand new landing page focused components."
+                subtitle="TheFront s'assure de vous offrir une expérience acheteur/vendeur de qualité. Rendez vos produits visibles auprès de nos milliers d'acheteurs."
                 align="left"
                 fadeUp
                 disableGutter
@@ -84,7 +84,7 @@ const Features = props => {
                 <div>
                   <CountUpNumber
                     end={400}
-                    label="Components"
+                    label="Produits"
                     textColor="primary"
                     suffix="+"
                   />
@@ -100,7 +100,7 @@ const Features = props => {
                 <div>
                   <CountUpNumber
                     end={5.0}
-                    label="Review Score"
+                    label="sur 5"
                     textColor="primary"
                   />
                 </div>

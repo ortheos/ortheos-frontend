@@ -28,13 +28,12 @@ const Partners = props => {
       <Grid container spacing={isMd ? 4 : 2}>
         <Grid item xs={12} md={6} data-aos="fade-up">
           <SectionHeader
-            title="We love to explore new ways to engage with brands and reach"
-            subtitle="Our mission is to help you to grow your design skills, meet and connect with professional dsigners who share your passions."
+            title="Acheter en seconde main c'est simple."
+            subtitle="Besoin d'attelles, de genouillères ou encore de béquilles ? Venez dénicher l'orthèse à prix bas qui vous assistera au quotidien. Votre achat est protégé et garanti sans frais supplémentaires."
             align="left"
-            label="100+ Integrations"
             ctaGroup={[
               <LearnMoreLink
-                title="See all integrations"
+                title="Voir toutes les annonces"
                 href="#"
                 variant="h6"
               />,
