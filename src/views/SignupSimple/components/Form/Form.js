@@ -126,7 +126,6 @@ const Form = () => {
               lng: lng,
             },
           });
-          console.log(body);
           fetch(process.env.REACT_APP_API_HOST + "v1/products", {
             method: "POST",
             headers: {
@@ -134,13 +133,14 @@ const Form = () => {
               "Content-Type": "application/json",
             },
             body: body,
+          }).then(() => {
+            window.location.replace("/");
           });
         },
         (error) => {
           console.log(error);
         }
       );
-      window.location.replace("/");
     }
 
     setFormState((formState) => ({

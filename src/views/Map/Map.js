@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import GoogleMapReact from "google-map-react";
 
 const getInfoWindowString = (product) => `
@@ -14,52 +14,48 @@ const getInfoWindowString = (product) => `
       </div>
     </div>`;
 
-const handleApiLoaded = (map, maps, products) => {
-  const markers = [];
-  const infowindows = [];
+const handleApiLoaded = (map, maps) => {
+  fetch(process.env.REACT_APP_API_HOST + "v1/products")
+    .then((res) => res.json())
+    .then(
+      (result) => {
+        const products = result.result;
+        const markers = [];
+        const infowindows = [];
 
-  products.forEach((product) => {
-    markers.push(
-      new maps.Marker({
-        position: {
-          lat: product.user.lat,
-          lng: product.user.lng,
-        },
-        map,
-      })
+        products.forEach((product) => {
+          markers.push(
+            new maps.Marker({
+              position: {
+                lat: product.user.lat,
+                lng: product.user.lng,
+              },
+              map,
+            })
+          );
+
+          infowindows.push(
+            new maps.InfoWindow({
+              content: getInfoWindowString(product),
+            })
+          );
+        });
+
+        markers.forEach((marker, i) => {
+          marker.addListener("click", () => {
+            infowindows[i].open(map, marker);
+          });
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
     );
-
-    infowindows.push(
-      new maps.InfoWindow({
-        content: getInfoWindowString(product),
-      })
-    );
-  });
-
-  markers.forEach((marker, i) => {
-    marker.addListener("click", () => {
-      infowindows[i].open(map, marker);
-    });
-  });
 };
 
 const Map = () => {
-  const [products, setProducts] = useState([]);
   const [lat, setLat] = useState(48.8566);
   const [lng, setLng] = useState(2.3522);
-
-  useEffect(() => {
-    fetch(process.env.REACT_APP_API_HOST + "v1/products")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setProducts(result.result);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-  }, []);
 
   navigator.geolocation.getCurrentPosition((position) => {
     setLat(position.coords.latitude);
@@ -73,9 +69,7 @@ const Map = () => {
         center={{ lat: lat, lng: lng }}
         defaultZoom={10}
         yesIWantToUseGoogleMapApiInternals
-        onGoogleApiLoaded={({ map, maps }) =>
-          handleApiLoaded(map, maps, products)
-        }
+        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
       />
     </div>
   );
