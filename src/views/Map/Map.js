@@ -12,6 +12,9 @@ const getInfoWindowString = (product) => `
       <div style="font-size: 14px; color: grey;">
         ${product.price} €
       </div>
+      <a href="/buy?productId=${product.id}" style="font-size: 14px;">
+        Commander ce produit
+      </a>
     </div>`;
 
 const handleApiLoaded = (map, maps) => {

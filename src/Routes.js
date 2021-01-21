@@ -8,6 +8,7 @@ import {
   Home as HomeView,
   Map as MapView,
   SignupSimple as SignupSimpleView,
+  Buy as BuyView,
   NotFound as NotFoundView,
 } from './views';
 
@@ -31,6 +32,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/sell"
+      />
+      <RouteWithLayout
+        component={BuyView}
+        exact
+        layout={MinimalLayout}
+        path="/buy"
       />
       <RouteWithLayout
         component={NotFoundView}
