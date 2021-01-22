@@ -10,7 +10,7 @@ const palette = {
   },
   type: "light",
   primary: {
-    main: "#00cec8",
+    main: "#224f86",
     light: "rgb(71, 145, 219)",
     dark: "rgb(17, 82, 147)",
     contrastText: "#fff",

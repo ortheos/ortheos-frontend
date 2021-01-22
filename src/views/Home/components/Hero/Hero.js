@@ -46,21 +46,27 @@ const Hero = props => {
           <SectionHeader
             title={
               <span>
-                Prêts à redonner vie à vos orthèses ?  
+                Prêts à donner une seconde vie à vos orthèses ?  
                 <br />
                 <Typography component="span" variant="inherit" color="primary">
-                  Vendez d'occasion.
+                  Vendez les !
                 </Typography>
               </span>
-            }
-            subtitle="Faites le choix de vendre vos orthèses inutilisées à ceux qui en ont vraiment besoin. Mettez en ligne gratuitement votre article en toute sécurité et contribuez à la réduction de déchets."
+            }        
+            subtitle="Vendez vos orthèses inutilisées à ceux qui en ont vraiment besoin. Mettez en ligne gratuitement vos produits plutôt que de vous en débarrasser !"
             ctaGroup={[
               <Button variant="contained" color="primary" size="large">
                 Vendre
               </Button>,
-              <Button variant="outlined" color="primary" size="large">
-                Comment ça marche ?
-              </Button>,
+               <Button
+                  size="large"
+                  variant="outlined"
+                  color="primary"
+                  href="https://app.umso.com/sites/gzrqy2wwqi6l"
+                >
+                 Comment ça marche ?
+                </Button>,
+              
             ]}
             align="left"
             disableGutter

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useMediaQuery, Grid, Button } from '@material-ui/core';
+import { useMediaQuery, Grid, TextField} from '@material-ui/core';
 import { Image } from 'components/atoms';
 import { SectionHeader } from 'components/molecules';
 
@@ -36,16 +36,20 @@ const Customization = props => {
     <div className={clsx(classes.root, className)} {...rest}>
       <SectionHeader
         title="Rejoins-nous"
-        subtitle="Renseignez vos coordonnées pour restez informé des nouvelles annonces."
-        align="center"
-        ctaGroup={[
-          <Button variant="contained" color="primary" size="large">
-            Start now
-          </Button>,
-          <Button variant="outlined" color="primary" size="large">
-            Learn more
-          </Button>,
-        ]}
+        subtitle="Renseignez vos coordonnées pour restez informé des nouveautés Ortheos"
+      ctaGroup={[
+       <Grid item xs={12}>
+            <TextField
+              placeholder=""
+              label="email@example.com *"
+              variant="outlined"
+              size="medium"
+              name="email"
+              fullWidth
+            />
+          </Grid>
+      ]}
+      align="center"
       />
       <Grid container spacing={isMd ? 4 : 2}>
         <Grid item xs={12} sm={6}>

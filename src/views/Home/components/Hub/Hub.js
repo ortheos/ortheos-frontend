@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, Button} from '@material-ui/core';
 import { Image } from 'components/atoms';
-import { SectionHeader, CountUpNumber } from 'components/molecules';
+import { SectionHeader} from 'components/molecules';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -65,46 +65,39 @@ const Features = props => {
               <SectionHeader
                 title={
                   <span>
-                    Livraison à domicile rapide en un clic.
+                    Vous cherchez à vous procurer une orthèse rapidement et à petit prix ? Il vous faut une attelle au plus vite !
                     <br />
                     <Typography component="span" variant="inherit" color="primary">
-                      Des bonnes affaires à des prix avantageux.
+                    Que vous soyez blessé(e) ou que vous ressentiez une douleur importante, vos orthèses vous attendent sur Ortheos.
                     </Typography>
                   </span>
                 }
-                subtitle="TheFront s'assure de vous offrir une expérience acheteur/vendeur de qualité. Rendez vos produits visibles auprès de nos milliers d'acheteurs."
+                subtitle="Rendez-vous sur Ortheos pour trouver l'orthèse qui vous convient et qu'un particulier vous revendra à très bon prix."
+                ctaGroup={[
+                  <Button
+                    size="large"
+                    variant="contained"
+                    color="primary"
+                    href="http://localhost:3000/map"
+                    >
+                    Acheter
+                  </Button>,
+
+                   <Button
+                      size="large"
+                      variant="outlined"
+                      color="primary"
+                      href="https://app.umso.com/sites/gzrqy2wwqi6l"
+                    >
+                     Comment ça marche ?
+                    </Button>,
+                  
+                ]}
                 align="left"
                 fadeUp
                 disableGutter
                 titleVariant="h3"
               />
-            </Grid>
-            <Grid item xs={12}>
-              <div className={classes.placementGrid}>
-                <div>
-                  <CountUpNumber
-                    end={400}
-                    label="Produits"
-                    textColor="primary"
-                    suffix="+"
-                  />
-                </div>
-                <div className={classes.placementGridItemMiddle}>
-                  <CountUpNumber
-                    end={100}
-                    label="Satisfaction"
-                    textColor="primary"
-                    suffix="%"
-                  />
-                </div>
-                <div>
-                  <CountUpNumber
-                    end={5.0}
-                    label="sur 5"
-                    textColor="primary"
-                  />
-                </div>
-              </div>
             </Grid>
           </Grid>
         </Grid>
