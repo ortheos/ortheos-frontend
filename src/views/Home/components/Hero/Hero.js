@@ -46,21 +46,27 @@ const Hero = props => {
           <SectionHeader
             title={
               <span>
-                Beautiful data representation
+                Prêts à donner une seconde vie à vos orthèses ?  
                 <br />
                 <Typography component="span" variant="inherit" color="primary">
-                  built with theFront.
+                  Vendez les !
                 </Typography>
               </span>
-            }
-            subtitle="World developers use our theFront theme to build their internal tools and client admin applications. Save yourself time and money."
+            }        
+            subtitle="Vendez vos orthèses inutilisées à ceux qui en ont vraiment besoin. Mettez en ligne gratuitement vos produits plutôt que de vous en débarrasser !"
             ctaGroup={[
               <Button variant="contained" color="primary" size="large">
-                Start now
+                Vendre
               </Button>,
-              <Button variant="outlined" color="primary" size="large">
-                Learn more
-              </Button>,
+               <Button
+                  size="large"
+                  variant="outlined"
+                  color="primary"
+                  href="https://app.umso.com/sites/gzrqy2wwqi6l"
+                >
+                 Comment ça marche ?
+                </Button>,
+              
             ]}
             align="left"
             disableGutter
@@ -77,7 +83,7 @@ const Hero = props => {
           data-aos={'fade-up'}
         >
           <Image
-            src="/images/illustrations/dashboard-screenshot.jpg"
+            src="/images/illustrations/medical-home.png"
             alt="TheFront Company"
             className={classes.image}
             data-aos="flip-left"

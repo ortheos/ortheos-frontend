@@ -39,13 +39,13 @@ const typography = {
   },
   subtitle1: {
     color: palette.text.primary,
-    fontSize: "16px",
+    fontSize: "14px",
     lineHeight: 1.4,
   },
   subtitle2: {
     color: palette.text.secondary,
     fontWeight: 400,
-    fontSize: "16px",
+    fontSize: "14px",
     lineHeight: 1.4,
   },
   body1: {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useMediaQuery, Grid, Button } from '@material-ui/core';
+import { useMediaQuery, Grid, TextField} from '@material-ui/core';
 import { Image } from 'components/atoms';
 import { SectionHeader } from 'components/molecules';
 
@@ -35,24 +35,27 @@ const Customization = props => {
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <SectionHeader
-        label="Customization"
-        title="Customize your product"
-        subtitle="We aim to take care of you. Need help with installation, find a bug, or just need a clarifiction about our documentation? We'll be there to lend a helping hand."
-        align="center"
-        ctaGroup={[
-          <Button variant="contained" color="primary" size="large">
-            Start now
-          </Button>,
-          <Button variant="outlined" color="primary" size="large">
-            Learn more
-          </Button>,
-        ]}
+        title="Rejoins-nous"
+        subtitle="Renseignez vos coordonnées pour restez informé des nouveautés Ortheos"
+      ctaGroup={[
+       <Grid item xs={12}>
+            <TextField
+              placeholder=""
+              label="email@example.com *"
+              variant="outlined"
+              size="medium"
+              name="email"
+              fullWidth
+            />
+          </Grid>
+      ]}
+      align="center"
       />
       <Grid container spacing={isMd ? 4 : 2}>
         <Grid item xs={12} sm={6}>
           <Grid container justif="center" alignItems="center">
             <Image
-              src="/images/illustrations/dashboard-screenshot.jpg"
+              src="/images/illustrations/medical-home.png"
               alt="TheFront Company"
               className={classes.image}
               data-aos="fade-up"
@@ -67,7 +70,7 @@ const Customization = props => {
             className={classes.lastGrid}
           >
             <Image
-              src="/images/illustrations/dashboard-screenshot1.jpg"
+              src="/images/illustrations/medical-home1.png"
               alt="TheFront Company"
               className={classes.image}
               data-aos="fade-up"
