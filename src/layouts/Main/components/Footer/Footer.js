@@ -63,10 +63,10 @@ const Footer = (props) => {
             <div className={classes.logoContainer}>
               <a href="/" title="thefront">
                 <Image
-                  className={classes.logoImage}
-                  src="/images/logos/logo-negative.svg"
-                  alt="thefront"
-                  lazy={false}
+                  //className={classes.logoImage}
+                  //src="/images/logos/logo-negative.svg"
+                  //alt="thefront"
+                  //lazy={false}
                 />
               </a>
             </div>
