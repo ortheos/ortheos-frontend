@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useMediaQuery, Grid, TextField} from '@material-ui/core';
-import { Image } from 'components/atoms';
+import { makeStyles} from '@material-ui/core/styles';
+import { Grid, TextField} from '@material-ui/core';
 import { SectionHeader } from 'components/molecules';
 
 const useStyles = makeStyles(theme => ({
@@ -27,10 +26,7 @@ const Customization = props => {
   const { className, ...rest } = props;
   const classes = useStyles();
 
-  const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
-    defaultMatches: true,
-  });
+
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
@@ -51,33 +47,6 @@ const Customization = props => {
       ]}
       align="center"
       />
-      <Grid container spacing={isMd ? 4 : 2}>
-        <Grid item xs={12} sm={6}>
-          <Grid container justif="center" alignItems="center">
-            <Image
-              src="/images/illustrations/medical-home.png"
-              alt="TheFront Company"
-              className={classes.image}
-              data-aos="fade-up"
-            />
-          </Grid>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Grid
-            container
-            justif="center"
-            alignItems="center"
-            className={classes.lastGrid}
-          >
-            <Image
-              src="/images/illustrations/medical-home1.png"
-              alt="TheFront Company"
-              className={classes.image}
-              data-aos="fade-up"
-            />
-          </Grid>
-        </Grid>
-      </Grid>
     </div>
   );
 };

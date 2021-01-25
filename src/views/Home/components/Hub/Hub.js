@@ -43,7 +43,7 @@ const Features = props => {
           data-aos="fade-up"
         >
           <Image
-            src="/images/illustrations/livraison-home.svg"
+            src="/images/illustrations/ortheses.png"
             alt="..."
             className={classes.coverImage}
             data-aos="flip-left"
@@ -65,14 +65,14 @@ const Features = props => {
               <SectionHeader
                 title={
                   <span>
-                    Vous cherchez à vous procurer une orthèse rapidement et à petit prix ? Il vous faut une attelle au plus vite !
+                    Vous cherchez à vous procurer une orthèse rapidement et à petit prix ?
                     <br />
                     <Typography component="span" variant="inherit" color="primary">
-                    Que vous soyez blessé(e) ou que vous ressentiez une douleur importante, vos orthèses vous attendent sur Ortheos.
+                    Il vous faut une orthèse au plus vite ! 
                     </Typography>
                   </span>
                 }
-                subtitle="Rendez-vous sur Ortheos pour trouver l'orthèse qui vous convient et qu'un particulier vous revendra à très bon prix."
+                subtitle="Que vous soyez blessé(e) ou que vous ressentiez une douleur importante, vos orthèses vous attendent sur Ortheos. Rendez-vous sur Ortheos pour trouver l’orthèse qui vous convient et qu’un particulier vous revendra à très bon prix."
                 ctaGroup={[
                   <Button
                     size="large"

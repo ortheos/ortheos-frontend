@@ -29,7 +29,25 @@ const Hero = props => {
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
-      <Grid
+      
+           <SectionHeader
+            title={
+              <span>
+                <br />
+                <Typography component="span" variant="inherit" color="primary">
+                Une orthèse c'est quoi ? 
+                <br />
+                C’est un appareil orthopédique que l'on place sur une partie du corps déficiente afin d'assister celle-ci dans sa mobilité pendant la phase de rééducation. Une orthèse peut notamment être un corset, une attelle, etc...
+                </Typography>
+              </span>
+            }       
+            align="left"
+            disableGutter
+            titleVariant="h4"
+          />
+          <br />
+
+          <Grid
         container
         justify="space-between"
         spacing={4}
@@ -46,7 +64,7 @@ const Hero = props => {
           <SectionHeader
             title={
               <span>
-                Prêts à donner une seconde vie à vos orthèses ?  
+                Prêt(e)s à donner une seconde vie à vos orthèses ?  
                 <br />
                 <Typography component="span" variant="inherit" color="primary">
                   Vendez les !
@@ -83,7 +101,7 @@ const Hero = props => {
           data-aos={'fade-up'}
         >
           <Image
-            src="/images/illustrations/medical-home.png"
+            src="/images/illustrations/ortheos1.png"
             alt="TheFront Company"
             className={classes.image}
             data-aos="flip-left"
