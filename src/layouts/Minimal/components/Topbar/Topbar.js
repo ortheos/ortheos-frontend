@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -40,14 +41,14 @@ const Topbar = (props) => {
   return (
     <Toolbar className={clsx(classes.toolbar, className)} {...rest}>
       <div className={classes.logoContainer}>
-        <a href="/" title="thefront">
+        <Link to="/" title="thefront">
           <Image
             className={classes.logoImage}
             src="/images/logos/logo.svg"
             alt="thefront"
             lazy={false}
           />
-        </a>
+        </Link>
       </div>
     </Toolbar>
   );

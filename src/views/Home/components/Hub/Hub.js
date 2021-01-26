@@ -1,32 +1,33 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Button} from '@material-ui/core';
-import { Image } from 'components/atoms';
-import { SectionHeader} from 'components/molecules';
+import React from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Typography, Button } from "@material-ui/core";
+import { Image } from "components/atoms";
+import { SectionHeader } from "components/molecules";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
   },
   placementGrid: {
-    display: 'flex',
+    display: "flex",
   },
   placementGridItemMiddle: {
     margin: `0 ${theme.spacing(3)}px`,
   },
   coverImage: {
     boxShadow:
-      '25px 60px 125px -25px rgba(80,102,144,.1), 16px 40px 75px -40px rgba(0,0,0,.2)',
+      "25px 60px 125px -25px rgba(80,102,144,.1), 16px 40px 75px -40px rgba(0,0,0,.2)",
     borderRadius: theme.spacing(2),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down("sm")]: {
       maxWidth: 500,
     },
   },
 }));
 
-const Features = props => {
+const Features = (props) => {
   const { className, ...rest } = props;
   const classes = useStyles();
 
@@ -65,33 +66,35 @@ const Features = props => {
               <SectionHeader
                 title={
                   <span>
-                    Vous cherchez à vous procurer une orthèse rapidement et à petit prix ?
+                    Vous cherchez à vous procurer une orthèse rapidement et à
+                    petit prix ?
                     <br />
-                    <Typography component="span" variant="inherit" color="primary">
-                    Il vous faut une orthèse au plus vite ! 
+                    <Typography
+                      component="span"
+                      variant="inherit"
+                      color="primary"
+                    >
+                      Il vous faut une orthèse au plus vite ! 
                     </Typography>
                   </span>
                 }
                 subtitle="Que vous soyez blessé(e) ou que vous ressentiez une douleur importante, vos orthèses vous attendent sur Ortheos. Rendez-vous sur Ortheos pour trouver l’orthèse qui vous convient et qu’un particulier vous revendra à très bon prix."
                 ctaGroup={[
+                  <Link to="/map">
+                    <Button size="large" variant="contained" color="primary">
+                      Acheter
+                    </Button>
+                  </Link>,
+
                   <Button
                     size="large"
-                    variant="contained"
+                    variant="outlined"
                     color="primary"
-                    href="http://localhost:3000/map"
-                    >
-                    Acheter
+                    href="https://app.umso.com/sites/gzrqy2wwqi6l"
+                    target="_blank"
+                  >
+                    Comment ça marche ?
                   </Button>,
-
-                   <Button
-                      size="large"
-                      variant="outlined"
-                      color="primary"
-                      href="https://app.umso.com/sites/gzrqy2wwqi6l"
-                    >
-                     Comment ça marche ?
-                    </Button>,
-                  
                 ]}
                 align="left"
                 fadeUp
