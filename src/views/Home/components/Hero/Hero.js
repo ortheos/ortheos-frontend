@@ -73,14 +73,18 @@ const Hero = props => {
             }        
             subtitle="Vendez vos orthèses inutilisées à ceux qui en ont vraiment besoin. Mettez en ligne gratuitement vos produits plutôt que de vous en débarrasser !"
             ctaGroup={[
-              <Button variant="contained" color="primary" size="large">
+              <Button 
+                  variant="contained" 
+                  color="primary" 
+                  size="large"
+                  href="https://ortheos.co/vente">
                 Vendre
               </Button>,
                <Button
                   size="large"
                   variant="outlined"
                   color="primary"
-                  href="https://app.umso.com/sites/gzrqy2wwqi6l"
+                  href="https://ortheos.co/"
                 >
                  Comment ça marche ?
                 </Button>,
