@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -6,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Typography, Button } from "@material-ui/core";
 import { Image } from "components/atoms";
 import { SectionHeader } from "components/molecules";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,6 +47,7 @@ const Features = (props) => {
         >
           <Image
             src="/images/illustrations/ortheses.png"
+
             alt="..."
             className={classes.coverImage}
             data-aos="flip-left"

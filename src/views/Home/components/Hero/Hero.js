@@ -64,6 +64,7 @@ const Hero = props => {
           <SectionHeader
             title={
               <span>
+
                 Prêt(e)s à donner une seconde vie à vos orthèses ?  
                 <br />
                 <Typography component="span" variant="inherit" color="primary">
@@ -73,6 +74,7 @@ const Hero = props => {
             }        
             subtitle="Vendez vos orthèses inutilisées à ceux qui en ont vraiment besoin. Mettez en ligne gratuitement vos produits plutôt que de vous en débarrasser !"
             ctaGroup={[
+                   
               <Button 
                   variant="contained" 
                   color="primary" 

@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { makeStyles} from '@material-ui/core/styles';
-import { Grid, TextField} from '@material-ui/core';
+
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useMediaQuery, Grid, TextField} from '@material-ui/core';
+import { Image } from 'components/atoms';
 import { SectionHeader } from 'components/molecules';
 
 const useStyles = makeStyles(theme => ({
@@ -42,11 +44,13 @@ const Customization = props => {
               size="medium"
               name="email"
               fullWidth
+
             />
           </Grid>
       ]}
       align="center"
       />
+
     </div>
   );
 };
