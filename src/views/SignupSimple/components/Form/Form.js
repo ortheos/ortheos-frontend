@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Grid, Button, TextField } from "@material-ui/core";
+import { Typography, Grid, Button, TextField, Input } from "@material-ui/core";
 import validate from "validate.js";
 import Geocode from "react-geocode";
 
@@ -66,6 +66,9 @@ const schema = {
   },
 };
 
+const reader = new FileReader();
+let img = '';
+
 const Form = () => {
   const classes = useStyles();
 
@@ -86,8 +89,17 @@ const Form = () => {
     }));
   }, [formState.values]);
 
-  const handleChange = (event) => {
+  const handleChange = async (event) => {
     event.persist();
+
+    if (event.target.files != null && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      reader.onloadend = function () {
+        img = reader.result;
+        console.log('RESULT', img);
+      }
+      reader.readAsDataURL(file);
+    }
 
     setFormState((formState) => ({
       ...formState,
@@ -103,10 +115,20 @@ const Form = () => {
         [event.target.name]: true,
       },
     }));
+    console.log("FORMSTATE :", formState);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
+    if (event.target.files != null && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      reader.onloadend = function () {
+        img = reader.result;
+        console.log('RESULT', img);
+      }
+      reader.readAsDataURL(file);
+    }
 
     if (formState.isValid) {
       Geocode.fromAddress(formState.values.address).then(
@@ -117,6 +139,7 @@ const Form = () => {
             description: formState.values.productDescription,
             size: formState.values.size,
             price: formState.values.price,
+            image: img,
             user: {
               email: formState.values.email,
               firstName: formState.values.firstName,
@@ -126,6 +149,8 @@ const Form = () => {
               lng: lng,
             },
           });
+
+          console.log(body);
           fetch(process.env.REACT_APP_API_HOST + "v1/products", {
             method: "POST",
             headers: {
@@ -157,7 +182,7 @@ const Form = () => {
 
   return (
     <div className={classes.root}>
-      <form name="password-reset-form" method="post" onSubmit={handleSubmit}>
+      <form name="password-reset-form" method="post" onSubmit={handleSubmit} encType="multipart/form-data">
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <TextField
@@ -289,6 +314,14 @@ const Form = () => {
               onChange={handleChange}
               type="text"
               value={formState.values.address || ""}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Input
+              name="images"
+              type="file"
+              onChange={handleChange}
+              inputProps={{ accept: 'image/*' }}
             />
           </Grid>
           <Grid item xs={12}>
