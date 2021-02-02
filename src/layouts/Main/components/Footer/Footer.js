@@ -61,7 +61,7 @@ const Footer = (props) => {
         <List disablePadding>
           <ListItem disableGutters className={classes.logoContainerItem}>
             <div className={classes.logoContainer}>
-              <a href="/" title="thefront">
+              <a href="/" title="ortheos">
                 <Image
                   //className={classes.logoImage}
                   //src="/images/logos/logo-negative.svg"

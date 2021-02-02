@@ -108,7 +108,7 @@ const Hero = props => {
         >
           <Image
             src="/images/illustrations/ortheos1.png"
-            alt="TheFront Company"
+            alt="Ortheos"
             className={classes.image}
             data-aos="flip-left"
             data-aos-easing="ease-out-cubic"

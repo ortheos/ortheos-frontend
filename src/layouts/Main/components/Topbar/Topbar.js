@@ -71,7 +71,7 @@ const Topbar = (props) => {
   return (
     <Toolbar disableGutters className={classes.toolbar} {...rest}>
       <div className={classes.logoContainer}>
-        <a href="/" title="thefront">
+        <a href="/" title="ortheos">
           <Image
             className={classes.logoImage}
             src="/images/logos/logo_ortheos.jpg"

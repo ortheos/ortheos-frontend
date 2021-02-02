@@ -41,11 +41,11 @@ const Topbar = (props) => {
   return (
     <Toolbar className={clsx(classes.toolbar, className)} {...rest}>
       <div className={classes.logoContainer}>
-        <Link to="/" title="thefront">
+        <Link to="/" title="ortheos">
           <Image
             className={classes.logoImage}
-            src="/images/logos/logo.svg"
-            alt="thefront"
+            src="/images/logos/logo_ortheos.jpg"
+            alt="ortheos"
             lazy={false}
           />
         </Link>
