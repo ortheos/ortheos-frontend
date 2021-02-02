@@ -9,6 +9,7 @@ import {
   Map as MapView,
   SignupSimple as SignupSimpleView,
   Buy as BuyView,
+  Remerciements as RemerciementsView,
   NotFound as NotFoundView,
 } from './views';
 
@@ -44,6 +45,12 @@ const Routes = () => {
         exact
         layout={MinimalLayout}
         path="/404"
+      />
+      <RouteWithLayout
+        component={RemerciementsView}
+        exact
+        layout={MinimalLayout}
+        path="/remerciements"
       />
       <Redirect to="/404" status="404" />
     </Switch>

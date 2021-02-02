@@ -111,7 +111,7 @@ const Form = () => {
             },
             body: body,
           }).then(() => {
-            window.location.replace("/");
+            window.location.replace("/remerciements");
           });
         },
         (error) => {
