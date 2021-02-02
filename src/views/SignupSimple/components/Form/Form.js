@@ -96,7 +96,6 @@ const Form = () => {
       const file = event.target.files[0];
       reader.onloadend = function () {
         img = reader.result;
-        console.log('RESULT', img);
       }
       reader.readAsDataURL(file);
     }
@@ -115,7 +114,6 @@ const Form = () => {
         [event.target.name]: true,
       },
     }));
-    console.log("FORMSTATE :", formState);
   };
 
   const handleSubmit = (event) => {
@@ -125,7 +123,6 @@ const Form = () => {
       const file = event.target.files[0];
       reader.onloadend = function () {
         img = reader.result;
-        console.log('RESULT', img);
       }
       reader.readAsDataURL(file);
     }
@@ -150,7 +147,6 @@ const Form = () => {
             },
           });
 
-          console.log(body);
           fetch(process.env.REACT_APP_API_HOST + "v1/products", {
             method: "POST",
             headers: {
@@ -159,7 +155,7 @@ const Form = () => {
             },
             body: body,
           }).then(() => {
-            window.location.replace("/");
+            window.location.replace("/remerciements");
           });
         },
         (error) => {
